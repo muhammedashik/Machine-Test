@@ -1,0 +1,107 @@
+<div class="card">
+
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-2 border ">
+                
+                <p class="text-primary mouse" (click)="goTo(2);">Registration</p>
+                <p class="text-primary mouse" (click)="goTo(1);">Details</p>
+            </div>
+            <div class="col-10" *ngIf="loading === false">
+                <form [formGroup]="registrationForm" (submit)="registr()">
+                    <div class="card-body border">
+                        <div class="card-header">
+                            <h5>Employee Registration</h5>
+                            
+                        </div>
+                        <div class="row ">
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control" formControlName="name">
+                                <div class="text-danger"
+                                    *ngIf="registrationForm.controls['name'].hasError('required') && (registrationForm.controls['name'].dirty || registrationForm.controls['name'].touched)">
+                                    <small> This field is required</small>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Dob</label>
+                                <input type="date" class="form-control" formControlName="dob">
+                                <div class="text-danger"
+                                    *ngIf="registrationForm.controls['dob'].hasError('required') && (registrationForm.controls['dob'].dirty || registrationForm.controls['dob'].touched)">
+                                    <small> This field is required</small>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <label class="form-label">Address</label>
+                                <textarea class="form-control" rows="2" formControlName="address"></textarea>
+                                <div class="text-danger"
+                                *ngIf="registrationForm.controls['address'].hasError('required') && (registrationForm.controls['address'].dirty || registrationForm.controls['address'].touched)">
+                                <small> This field is required</small>
+                            </div>
+                            </div>
+
+                            <div class="col-6 mb-3">
+                                <label class="form-label">Role</label>
+                                <select class="form-select" formControlName="role">
+                                    <option></option>
+                                    <option *ngFor="let value of role">{{value}}</option>
+                                </select>
+                                <div class="text-danger"
+                                *ngIf="registrationForm.controls['role'].hasError('required') && (registrationForm.controls['role'].dirty || registrationForm.controls['role'].touched)">
+                                <small> This field is required</small>
+                            </div>
+                            </div>
+                            <div class="col-6 ">
+                                <div>
+                                    <label class="form-label">Gender</label>
+                                </div>
+                               
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1"
+                                        formControlName="gender" value="male">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2"
+                                        formControlName="gender" value="female">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio3"
+                                        formControlName="gender" value="other">
+                                    <label class="form-check-label" for="inlineRadio3">Other</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <span class="btn btn-outline-primary" (click)="addNewPhoneNum()"><i
+                                        class="fa-solid fa-plus"> </i> Add Phone No.</span>
+                                <div class="row"
+                                    *ngFor="let num of registrationForm.get('phone').controls;let i = index"
+                                    [formGroup]="num">
+                                    <div class="col-8">
+                                        Number {{i +1}}<input class="form-control form-control-sm"
+                                            formControlName="phone">
+                                    </div>
+                                    <div class="col-2 mt-4">
+                                        <span (click)="deleteNum(i)"><i class="fa-solid fa-trash"></i></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div>
+                                <button [disabled]="!registrationForm.valid" class="btn btn-success mt-4"
+                                    type="submit">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-10" *ngIf="loading === true">
+                <app-employee-details></app-employee-details>
+            </div>
+        </div>
+    </div>
+</div>

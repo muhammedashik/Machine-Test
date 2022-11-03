@@ -1,0 +1,32 @@
+
+<div class="card-body border">
+    <div class="card-header">
+        <h5>Employee Details</h5>
+    </div>
+    <table class="table border">
+        <thead>
+            <tr>
+                <th scope="col">Sl No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Dob</th>
+                <th scope="col">Role</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Phone</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of employeeDetails; let i = index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{data.name}}</td>
+                <td>{{data.address}}</td>
+                <td>{{data.dob}}</td>
+                <td>{{data.role}}</td>
+                <td>{{data.gender}}</td>
+                
+                <td>{{getPhone(data.phone)}}</td>
+                <!--  -->
+            </tr>
+        </tbody>
+    </table>
+</div>
